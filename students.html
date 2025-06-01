@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Marks</title>
+</head>
+<body>
+  <h2>Student Marks</h2>
+  <table border="1" id="marksTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Math</th>
+        <th>Science</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch('marks.json')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.querySelector("#marksTable tbody");
+        data.forEach(student => {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td>${student.name}</td><td>${student.math}</td><td>${student.science}</td>`;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error loading JSON:', error));
+  </script>
+</body>
+</html>
